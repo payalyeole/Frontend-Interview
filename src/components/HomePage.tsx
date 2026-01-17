@@ -137,23 +137,22 @@ export default function HomePage() {
                 Stay updated with the latest trends in finance, accounting, and career growth.
             </p>
         </section>
-        <CreateBlog />
-
+<hr />
       {/* BLOG LIST + DETAIL GRID */}
-      <div className=" mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+      <div className=" mx-auto h-300 grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
 
         {/* SIDEBAR LIST */}
-        <div className="bg-white rounded-xl shadow p-4 md:h-[75vh] overflow-auto">
+        <div className="bg-white rounded-xl shadow p-4 md:h-[150vh] overflow-auto">
           <h3 className="text-lg font-semibold text-gray-800 mb-3">Latest Articles</h3>
           <BlogList onSelectBlog={setSelectedBlogId} />
         </div>
 
         {/* BLOG DETAILS */}
-        <div className="md:col-span-2 bg-white rounded-xl shadow p-6 h-[75vh] overflow-auto">
+        <div className="md:col-span-2 bg-white rounded-xl shadow p-6 h-[150vh] overflow-auto">
           <BlogDetail blogId={selectedBlogId} />
         </div>
       </div>
-
+        <CreateBlog />
         {/* FOOTER */}
         <footer className="bg-gray-950 text-gray-300 mt-16 pt-14 pb-8 relative">
 
