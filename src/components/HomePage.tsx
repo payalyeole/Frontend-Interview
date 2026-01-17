@@ -154,50 +154,64 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <footer className=" bg-gray-900 text-gray-300 mt-12 py-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 px-6">
+        {/* FOOTER */}
+        <footer className="bg-gray-950 text-gray-300 mt-16 pt-14 pb-8 relative">
 
-          <div>
-            <h3 className="text-white font-bold mb-2 text-lg">CA MONK</h3>
-            <p className="text-sm leading-6">
-              Empowering the next generation of financial leaders with tools, 
-              community and knowledge.
+        {/* Top Gradient Line */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+
+            {/* Brand Section */}
+            <div>
+            <h3 className="text-white font-bold text-2xl tracking-wide">CA MONK</h3>
+            <p className="text-sm mt-3 leading-6 text-gray-400">
+                Empowering the next generation of financial leaders with tools, 
+                community, and knowledge to grow professionally.
             </p>
-          </div>
+            </div>
 
-          <div>
-            <p className="font-semibold text-white mb-2">RESOURCES</p>
+            {/* Resources */}
+            <div>
+            <p className="font-semibold text-white text-lg mb-3">Resources</p>
             <ul className="space-y-2 text-sm">
-              <li>Blog</li>
-              <li>Webinars</li>
-              <li>Case Studies</li>
+                <li className="hover:text-white transition cursor-pointer">Blog</li>
+                <li className="hover:text-white transition cursor-pointer">Webinars</li>
+                <li className="hover:text-white transition cursor-pointer">Case Studies</li>
             </ul>
-          </div>
+            </div>
 
-          <div>
-            <p className="font-semibold text-white mb-2">PLATFORM</p>
+            {/* Platform */}
+            <div>
+            <p className="font-semibold text-white text-lg mb-3">Platform</p>
             <ul className="space-y-2 text-sm">
-              <li>Job Board</li>
-              <li>Practice Tests</li>
-              <li>Mentorship</li>
+                <li className="hover:text-white transition cursor-pointer">Job Board</li>
+                <li className="hover:text-white transition cursor-pointer">Practice Tests</li>
+                <li className="hover:text-white transition cursor-pointer">Mentorship</li>
             </ul>
-          </div>
+            </div>
 
-          <div>
-            <p className="font-semibold text-white mb-2">CONNECT</p>
+            {/* Connect */}
+            <div>
+            <p className="font-semibold text-white text-lg mb-3">Connect</p>
             <ul className="space-y-2 text-sm">
-              <li>LinkedIn</li>
-              <li>Twitter</li>
-              <li>Instagram</li>
+                <li className="hover:text-white transition cursor-pointer">LinkedIn</li>
+                <li className="hover:text-white transition cursor-pointer">Twitter</li>
+                <li className="hover:text-white transition cursor-pointer">Instagram</li>
             </ul>
-          </div>
+            </div>
+
         </div>
 
-        <p className="text-center text-xs text-gray-500 mt-10">
-          © 2024 CA Monk. All rights reserved.
-        </p>
-      </footer>
+        {/* Bottom Line */}
+        <div className="border-t border-gray-800 mt-12 pt-6">
+            <p className="text-center text-xs text-gray-500">
+            © 2024 CA Monk. All rights reserved.
+            </p>
+        </div>
+
+        </footer>
+
     </div>
   );
 }
