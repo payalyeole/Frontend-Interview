@@ -1,10 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { getBlogById } from "@/api/blogApi";
 import { Share2, Heart, MessageCircle } from "lucide-react";
+import { useState } from "react";
 
 type Props = { blogId: number | null };
 
 export default function BlogDetail({ blogId }: Props) {
+  const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [commentInput, setCommentInput] = useState("");
+  const [comments, setComments] = useState<string[]>([]);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["blog", blogId],
     queryFn: () => getBlogById(blogId!),
@@ -130,21 +137,74 @@ export default function BlogDetail({ blogId }: Props) {
         </div>
 
         {/* Like + Comment */}
-        <div className="flex gap-6 mt-6">
-          <button
-            className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition"
-          >
-            <Heart size={20} />
-            <span>Like</span>
-          </button>
+      <div className="flex gap-6 mt-6">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsLiked(!isLiked);
+            setLikes(isLiked ? likes - 1 : likes + 1);
+          }}
+          className={`flex items-center gap-2 transition ${
+            isLiked ? "text-red-500" : "text-gray-600 hover:text-indigo-600"
+          }`}
+        >
+          <Heart size={20} fill={isLiked ? "red" : "none"} />
+          <span>Like ({likes})</span>
+        </button>
 
-          <button
-            className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition"
-          >
-            <MessageCircle size={20} />
-            <span>Comment</span>
-          </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowComments(!showComments);
+          }}
+          className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition"
+        >
+          <MessageCircle size={20} />
+          <span>Comment ({comments.length})</span>
+          {/* Comment Input Section */}
+        </button>
+
+      </div>
+      {showComments && (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="mt-4 bg-gray-50 p-3 rounded-lg space-y-3"
+        >
+
+          {/* Input + Post Button Inline */}
+          <div className="relative">
+            <input
+              type="text"
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
+              placeholder="Write a comment..."
+              className="w-full border rounded-md px-3 py-2 pr-14 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+
+            {/* Inline Post Button */}
+            <h4
+              onClick={() => {
+                if (!commentInput.trim()) return;
+                setComments([...comments, commentInput]);
+                setCommentInput("");
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-indigo-600 font-semibold cursor-pointer  text-sm"
+            >
+              Post
+            </h4>
+          </div>
+
+          {/* Comment Display */}
+          <div className="space-y-2 text-left">
+            {comments.map((c, i) => (
+            <div key={i} className="text-sm text-gray-800 leading-snug">
+              {c}
+            </div>
+            ))}
+          </div>
+
         </div>
+      )}
       </div>
     </div>
   );
