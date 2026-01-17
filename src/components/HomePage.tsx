@@ -2,7 +2,7 @@ import BlogList from "@/components/BlogList";
 import BlogDetail from "@/components/BlogDetail";
 import { useState } from "react";
 import CreateBlog from "./CreateBlog";
-import { Menu, Search, Briefcase, Gift, Calendar, User, ChevronDown, BookOpen, Bell } from "lucide-react";
+import { Menu, Search, Briefcase, Gift, Calendar, User, ChevronDown, BookOpen, Bell, ToolCase } from "lucide-react";
 export default function HomePage() {
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
     const [openDropdown, setOpenDropdown] = useState(false);
@@ -106,7 +106,7 @@ export default function HomePage() {
       {/* Bottom Navigation Bar */}
       <nav className="hidden md:flex justify-center gap-10 py-3 bg-gray-50 border-t">
         <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-indigo-600 transition">
-          <Search size={18} /> Tools
+          <ToolCase size={18} /> Tools
         </a>
 
         <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-indigo-600 transition">
