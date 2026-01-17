@@ -1,4 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { useMemo } from "react";
+import { BadgeCheck, BookOpen, Briefcase } from "lucide-react"; // example icons
 
 type BlogCardProps = {
   blog: any;
@@ -6,28 +8,66 @@ type BlogCardProps = {
 };
 
 export default function BlogCard({ blog, onSelect }: BlogCardProps) {
+  // Time ago calculation
+  const timeAgo = useMemo(() => {
+    const diff = Date.now() - new Date(blog.date).getTime();
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (minutes < 60) return `${minutes} mins ago`;
+    if (hours < 24) return `${hours} hours ago`;
+    return `${days} days ago`;
+  }, [blog.date]);
+
   return (
     <Card
-      className="cursor-pointer group transition-all border hover:shadow-xl rounded-xl overflow-hidden"
       onClick={() => onSelect(blog.id)}
+      className="
+        relative cursor-pointer
+        bg-white border rounded-xl shadow-sm
+        hover:shadow-md transition-all
+        p-5 space-y-2
+        hover:-translate-y-1
+      "
     >
-      <CardContent className="p-4">
-        <p className="text-xs font-medium text-indigo-600 mb-2 uppercase tracking-wide">
-          {blog.category?.join(", ")}
-        </p>
+      {/* Blue Accent Bar for Featured */}
+      {blog.featured && (
+        <div className="absolute left-0 top-0 h-full w-1 bg-indigo-600 rounded-l-xl" />
+      )}
 
-        <h2 className="font-bold text-xl group-hover:text-indigo-700 transition">
-          {blog.title}
-        </h2>
+      {/* Top Row: Icon + Category + Time Ago */}
+      <div className="flex items-start justify-between">
+        <div className="flex items-center gap-2 text-xs font-semibold text-gray-500">
+          {/* Replace icons based on category */}
+          <BadgeCheck size={14} className="text-indigo-600" />
+          {blog.category[0]}
+        </div>
 
-        <p className="text-gray-500 text-sm mt-2 line-clamp-2">
-          {blog.description}
-        </p>
+        <span className="text-xs text-gray-400">{timeAgo}</span>
+      </div>
 
-        <p className="text-xs text-gray-400 mt-3">
-          {new Date(blog.date).toDateString()}
-        </p>
-      </CardContent>
+      {/* Title */}
+      <h2 className="text-lg font-semibold text-gray-900">
+        {blog.title}
+      </h2>
+
+      {/* Description */}
+      <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+        {blog.description}
+      </p>
+
+      {/* Tags */}
+      <div className="flex gap-2 mt-2">
+        {blog.category?.map((tag: string) => (
+          <span
+            key={tag}
+            className="text-xs bg-gray-100 px-3 py-1 rounded-full text-gray-600"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </Card>
   );
 }

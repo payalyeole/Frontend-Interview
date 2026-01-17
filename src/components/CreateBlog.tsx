@@ -37,12 +37,21 @@ export default function CreateBlog() {
   };
 
   return (
-    <div className="p-4 space-y-3 border-b ">
+    <div className="max-w-300 mx-auto p-4 space-y-3 border-b ">
+      <h2 className="text-2xl font-bold text-gray-800 mb-2">
+        Create New Blog
+      </h2>
       <Input placeholder="Blog Title" value={title} onChange={(e) => setTitle(e.target.value)} />
       <Input placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
       <Input placeholder="Short Description" value={description} onChange={(e) => setDescription(e.target.value)} />
       <Textarea placeholder="Full Content" value={content} onChange={(e) => setContent(e.target.value)} />
-      <Button onClick={handleSubmit}>Create Blog</Button>
+      <Button 
+            onClick={handleSubmit}
+            className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold py-2 rounded-lg shadow-md transition-all duration mt-4"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? "Creating..." : "Create Blog"}
+      </Button>
     </div>
   );
 }
